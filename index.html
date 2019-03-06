@@ -1,0 +1,110 @@
+<html>
+    <title>project chart api poloniex</title>
+    <head>
+        <!-- TradingView Widget BEGIN -->
+<div class="tradingview-widget-container">
+        <div id="tradingview_9cab9"></div>
+        <div class="tradingview-widget-copyright"><a href="https://br.tradingview.com/symbols/POLONIEX-BTCUSDC/" rel="noopener" target="_blank"><span class="blue-text">BTCUSDC gráfico</span></a> por TradingView</div>
+        <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+        <script type="text/javascript" src="js/purl.js"></script>
+        <script type="text/javascript">
+        new TradingView.widget(
+        {
+        "width": 980,
+        "height": 610,
+        "symbol": "POLONIEX:BTCUSDC",
+        "interval": "1",
+        "timezone": "America/Sao_Paulo",
+        "theme": "Light",
+        "style": "1",
+        "locale": "br",
+        "toolbar_bg": "#f1f3f6",
+        "enable_publishing": false,
+        "allow_symbol_change": true,
+        "container_id": "tradingview_9cab9"
+      }
+        );
+        </script>
+      </div>
+      <!-- TradingView Widget END -->
+        <script src="js/jquery.js"></script>
+        <script src="js/chart.js"></script>
+        <script>
+        const url = "https://poloniex.com/public?command=returnChartData&currencyPair=BTC_LTC&start=1546300800&end=1546312800&period=900";
+        var local;    
+        $(document).ready(function(){
+            $.get(url, function(objJson){
+                console.log(objJson);
+                $('#data').text(
+                    JSON.stringify(objJson[0].high) + ' ' +JSON.stringify(objJson[0].low + ' <-> ' + objJson[1].high)
+                    
+                );
+
+            })
+            
+        });
+        lt = {
+            d1: '-10',
+            d2: '30',
+            d3: '40',
+            d4: '20',
+            d5: '15',
+            d6: '35',
+            d7: '37'
+        }
+        a = [lt.d1, lt.d2, lt.d3, lt.d4, lt.d5, lt.d6, lt.d7];
+        </script>
+    </head>
+
+    <body>
+        <div id="data"></div>
+        <div style="width: 60%; height: 70%">
+        <canvas id="myChart"></canvas>
+        </div>
+        <div id="dataId"></div>    
+<script>
+$.get(url, function(a){
+var ctx = document.getElementById("myChart").getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange", "black"],
+        datasets: [{
+            label: '# of Votes',
+            data: [a[0].high, a[1].high,a[2].high,a[3].high, a[4].high,a[5].high,a[6].high],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(0, 0, 0, 0.2)'
+                
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(0, 0, 0, 1)'
+            ],
+            borderWidth: '1'
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:false
+                }
+            }]
+        }
+    }
+});
+});
+</script>
+    </body>
+</html>
